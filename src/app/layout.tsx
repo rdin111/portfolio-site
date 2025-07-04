@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header  from "@/components/shared/Header";
 import { Footer } from '@/components/shared/Footer';
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -37,11 +39,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            <div className="flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-grow">{children}</main>
+                <Footer />
+            </div>
 
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
         </body>
         </html>
     );
