@@ -4,18 +4,16 @@ import { projects } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { type Metadata } from 'next';
-import Image from 'next/image'; // 1. Import the Image component
+import Image from 'next/image';
 
-type ProjectPageProps = {
-    params: {
-        slug: string;
-    };
+// 1. Define the props type correctly.
+type Props = {
+    params: { slug: string };
 };
 
-// 2. This function generates dynamic metadata for the page
-export function generateMetadata({ params }: ProjectPageProps): Metadata {
-    const { slug } = params;
-    const project = projects.find((p) => p.slug === slug);
+// 2. Use the 'Props' type for generateMetadata.
+export function generateMetadata({ params }: Props): Metadata {
+    const project = projects.find((p) => p.slug === params.slug);
 
     if (!project) {
         return {
@@ -23,21 +21,22 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
         };
     }
 
+    // Remember to replace 'Your Name' here
     return {
-        title: `${project.title} | Your Name`,
+        title: `${project.title} | Rahul Dinesh`,
         description: project.description,
     };
 }
 
-// This function tells Next.js which slugs to pre-render
+// This function correctly pre-builds the static pages.
 export function generateStaticParams() {
     return projects.map((project) => ({
         slug: project.slug,
     }));
 }
 
-
-const ProjectPage = ({ params }: ProjectPageProps) => {
+// 3. Use the 'Props' type for the page component.
+export default function ProjectPage({ params }: Props) {
     const { slug } = params;
     const project = projects.find((p) => p.slug === slug);
 
@@ -50,14 +49,13 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
             <section className="space-y-8">
                 <h1 className="text-4xl font-bold">{project.title}</h1>
 
-                {/* 3. Add the Next.js Image component */}
                 <div className="relative w-full h-96 overflow-hidden rounded-lg">
                     <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="object-cover"
-                        priority // Helps load this important image faster
+                        priority
                     />
                 </div>
 
@@ -72,6 +70,4 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
             </section>
         </main>
     );
-};
-
-export default ProjectPage;
+}
