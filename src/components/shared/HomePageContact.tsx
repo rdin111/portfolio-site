@@ -38,7 +38,7 @@ export function HomePageContact() {
             <div className="space-y-2">
                 <h2 className="text-3xl font-bold">Get In Touch</h2>
                 <p className="max-w-md text-muted-foreground">
-                    I'm actively exploring full-time software engineering roles starting Fall 2025. If you're hiring, I’d be glad to discuss how I can contribute to your team.
+                    I&apos;m actively exploring full-time software engineering roles starting Fall 2025. If you&apos;re hiring, I’d be glad to discuss how I can contribute to your team.
                 </p>
             </div>
 

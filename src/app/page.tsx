@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <section className="container mx-auto flex flex-col items-center justify-center gap-6 text-center">
           <h1 className="text-5xl md:text-7xl font-bold ">
-            Hi, I'm Rahul Dinesh
+            Hi, I&apos;m Rahul Dinesh
           </h1>
           <p className="text-sm text-muted-foreground">
             Computer Science student at UNC Charlotte · Graduating Fall 2025
@@ -21,7 +21,7 @@ export default function Home() {
 
           <div className="max-w-xl text-lg text-muted-foreground md:text-xl space-y-4">
             <p>
-                I'm a developer with experience building modern web applications across the frontend, backend, and
+                I&apos;m a developer with experience building modern web applications across the frontend, backend, and
                 infrastructure layers. I’m passionate about solving real-world problems through clean code, scalable systems,
                 and thoughtful design.
             </p>
