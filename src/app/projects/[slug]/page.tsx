@@ -1,48 +1,35 @@
-// src/app/projects/[slug]/page.tsx
-
 import { projects } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { type Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
-// 1. Define the props type correctly.
 type Props = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
-// 2. Use the 'Props' type for generateMetadata.
-export function generateMetadata({ params }: Props): Metadata {
-    const project = projects.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
-        return {
-            title: 'Project Not Found',
-        };
+        return { title: 'Project Not Found' };
     }
 
-    // Remember to replace 'Your Name' here
     return {
         title: `${project.title} | Rahul Dinesh`,
         description: project.description,
     };
 }
 
-// This function correctly pre-builds the static pages.
-export function generateStaticParams() {
-    return projects.map((project) => ({
-        slug: project.slug,
-    }));
-}
-
-// 3. Use the 'Props' type for the page component.
-export default function ProjectPage({ params }: Props) {
-    const { slug } = params;
+export default async function ProjectPage({ params }: Props) {
+    const { slug } = await params;
     const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
         notFound();
     }
+
 
     return (
         <main className="container mx-auto py-10">
