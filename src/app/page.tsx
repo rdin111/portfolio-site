@@ -55,7 +55,7 @@ export default function Home() {
               </div>
               <div className="mt-12">
                   <Button asChild size="lg" className="text-base">
-                      <Link href="/projects">
+                      <Link href="#/projects">
                           View All Projects
                           <ArrowRight className="ml-2 h-5 w-5" />
                       </Link>
