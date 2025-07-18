@@ -9,7 +9,7 @@ export function Footer() {
         <footer className="w-full border-t border-border/40 mt-20">
             <div className="container mx-auto flex h-20 items-center justify-center-safe">
                 <p className="text-sm text-muted-foreground">
-                    &copy; {currentYear} Rahul Dinesh. Built with Next.js · Hosted on Vercel.
+                    &copy; {currentYear} Rahul Dinesh. Built with Next.js
                 </p>
                 <div className="flex items-center gap-2">
                     <Button asChild variant="ghost" size="icon">
