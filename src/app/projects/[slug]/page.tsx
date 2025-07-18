@@ -3,15 +3,17 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import {Button} from "@/components/ui/button";
-import {ExternalLink} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Github, ExternalLink } from "lucide-react";
 
-type Props = {
-    params: Promise<{ slug: string }>;
+type ProjectPageProps = {
+    params: {
+        slug: string;
+    };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
+export function generateMetadata({ params }: ProjectPageProps): Metadata {
+    const { slug } = params;
     const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
@@ -24,30 +26,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function ProjectPage({ params }: Props) {
-    const { slug } = await params;
+//  need to export generateStaticParams for dynamic SSG to work
+export function generateStaticParams() {
+    return projects.map((project) => ({
+        slug: project.slug,
+    }));
+}
+
+
+export default function ProjectPage({ params }: ProjectPageProps) {
+    const { slug } = params;
     const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
         notFound();
     }
 
-
     return (
         <main className="container mx-auto py-10">
             <section className="space-y-8">
                 <h1 className="text-4xl font-bold">{project.title}</h1>
 
-                <div className="relative w-full h-96 overflow-hidden rounded-lg">
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </div>
+                {/* Conditionally render the image only if it exists */}
+                {project.image && (
+                    <div className="relative w-full h-96 overflow-hidden rounded-lg">
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                )}
+
                 <div className="flex flex-wrap gap-4">
+                    {/* Conditionally render the Live Demo button */}
                     {project.liveDemoUrl && (
                         <Button asChild>
                             <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
@@ -56,8 +70,35 @@ export default async function ProjectPage({ params }: Props) {
                             </a>
                         </Button>
                     )}
-                </div>
 
+                    {/* Handle single GitHub link */}
+                    {typeof project.githubUrl === 'string' && (
+                        <Button asChild variant="secondary">
+                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                <Github className="mr-2 h-4 w-4" />
+                                View on GitHub
+                            </a>
+                        </Button>
+                    )}
+
+                    {/* Handle separate Frontend/Backend links */}
+                    {typeof project.githubUrl === 'object' && (
+                        <>
+                            <Button asChild variant="secondary">
+                                <a href={project.githubUrl.frontend} target="_blank" rel="noopener noreferrer">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    Frontend Repo
+                                </a>
+                            </Button>
+                            <Button asChild variant="secondary">
+                                <a href={project.githubUrl.backend} target="_blank" rel="noopener noreferrer">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    Backend Repo
+                                </a>
+                            </Button>
+                        </>
+                    )}
+                </div>
 
                 <div className="flex flex-wrap gap-2">
                     {project.tech.map((techItem) => (
@@ -66,7 +107,9 @@ export default async function ProjectPage({ params }: Props) {
                         </Badge>
                     ))}
                 </div>
-                <p className="text-lg text-muted-foreground">{project.description}</p>
+                <div className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground">
+                    <p>{project.description}</p>
+                </div>
             </section>
         </main>
     );

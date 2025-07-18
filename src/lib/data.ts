@@ -3,8 +3,10 @@ export type Project = {
     title: string;
     description: string;
     tech: string[];
-    image: string; // URL or path to  image in /public
-    liveDemoUrl?: string; //
+    image?: string; // URL or path to  image in /public
+    liveDemoUrl?: string;
+    githubUrl?: string | { frontend: string; backend: string };
+
 };
 
 export const projects: Project[] = [
@@ -26,6 +28,11 @@ export const projects: Project[] = [
         ],
         image: '/images/coffeesiteimg.png',
         liveDemoUrl: 'https://www.coffees.dev',
+        githubUrl: {
+            frontend: 'https://github.com/rdin111/coffee-site-frontend',
+            backend: 'https://github.com/rdin111/coffee-site-backend',
+        },
+
 
     },
     {
@@ -35,6 +42,12 @@ export const projects: Project[] = [
         tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'Tailwind'],
         image: '/images/flowboardimg.png',
         liveDemoUrl: 'https://www.flowboard.me',
+        githubUrl: {
+            frontend: 'https://github.com/rdin111/flowboard-frontend',
+            backend: 'https://github.com/rdin111/flowboard-backend',
+        },
+
+
     },
     {
         slug: 'portfolio',
@@ -42,7 +55,6 @@ export const projects: Project[] = [
         description:
             'The site you’re viewing now, built from scratch with React, TypeScript, and Next.js 15. Fully responsive, dark/light mode support, icon libraries, and a modern component architecture using shadcn/ui.',
         tech: ['Next.js 15', 'React', 'TypeScript', 'shadcn/ui', 'Vercel'],
-        image: '/images/project-three.png',
-        liveDemoUrl: 'https://rahuld.tech',
+        githubUrl: 'https://github.com/rdin111/portfolio-site',
     }
 ];
