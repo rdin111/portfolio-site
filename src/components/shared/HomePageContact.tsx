@@ -8,12 +8,12 @@ import { Github, Linkedin, Mail, Check } from "lucide-react"; // 2. Import the C
 const socialProfiles = [
     {
         name: "GitHub",
-        url: "https://github.com/your-username",
+        url: "https://github.com/rdin111",
         icon: <Github className="h-5 w-5" />,
     },
     {
         name: "LinkedIn",
-        url: "https://linkedin.com/in/your-username",
+        url: "https://www.linkedin.com/in/rahul-dinesh1",
         icon: <Linkedin className="h-5 w-5" />,
     },
 ];

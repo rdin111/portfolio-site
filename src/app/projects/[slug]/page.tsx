@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import {Button} from "@/components/ui/button";
+import {ExternalLink} from "lucide-react";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -45,6 +47,17 @@ export default async function ProjectPage({ params }: Props) {
                         priority
                     />
                 </div>
+                <div className="flex flex-wrap gap-4">
+                    {project.liveDemoUrl && (
+                        <Button asChild>
+                            <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="mr-2 h-4 w-4" />
+                                View Live Demo
+                            </a>
+                        </Button>
+                    )}
+                </div>
+
 
                 <div className="flex flex-wrap gap-2">
                     {project.tech.map((techItem) => (
