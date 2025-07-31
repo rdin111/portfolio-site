@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
 
 type ProjectPageProps = {
-    params: {
-        slug: string;
-    };
+    params: Promise<{ slug: string }>;
 };
 
-export function generateMetadata({ params }: ProjectPageProps): Metadata {
-    const { slug } = params;
+export async function generateMetadata({
+                                           params,
+                                       }: ProjectPageProps): Promise<Metadata> {
+    const { slug } = await params;
     const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
@@ -26,21 +26,22 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
     };
 }
 
-//  need to export generateStaticParams for dynamic SSG to work
 export function generateStaticParams() {
     return projects.map((project) => ({
         slug: project.slug,
     }));
 }
 
-
-export default function ProjectPage({ params }: ProjectPageProps) {
-    const { slug } = params;
+export default async function ProjectPage({
+                                              params,
+                                          }: ProjectPageProps) {
+    const { slug } = await params;
     const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
         notFound();
     }
+
 
     return (
         <main className="container mx-auto py-10">
