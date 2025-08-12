@@ -10,7 +10,16 @@ const certificateData = [
         description:
             "Demonstrates foundational cloud knowledge including core AWS services, architecture, and security.",
     },
-    // You can add more certificate objects here in the future
+    {
+        name: "AWS Certified AI Practitioner",
+        imageUrl:
+            "https://images.credly.com/images/4d4693bb-530e-4bca-9327-de07f3aa2348/image.png",
+        verifyUrl:
+            "https://www.credly.com/badges/00dcc4b7-fffc-4ba2-a6bb-dcbe0adf6743",
+        description:
+            "Validates foundational understanding of artificial intelligence and machine learning concepts, AWS AI/ML services, and responsible AI practices.",
+    }
+
 ];
 
 export function Certificates() {
