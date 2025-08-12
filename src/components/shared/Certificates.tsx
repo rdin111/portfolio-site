@@ -42,11 +42,11 @@ export function Certificates() {
                                 className="object-contain"
                             />
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 w-xl mx-auto">
                             <h3 className="text-base font-medium text-foreground">
                                 {cert.name}
                             </h3>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs  text-muted-foreground break-normal">
                                 {cert.description}
                             </p>
                         </div>
