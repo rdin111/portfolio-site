@@ -6,14 +6,31 @@ import { ProjectCard } from '@/components/shared/ProjectCard';
 import { ArrowRight } from 'lucide-react';
 import { projects } from "@/lib/data";
 import {HomePageContact} from "@/components/shared/HomePageContact";
+import TextType from "@/blocks/TextAnimations/TextType/TextType";
+
+
 
 export default function Home() {
     const featuredProjects = projects.slice(0, 3);
     return (
         <main className="flex min-h-screen flex-col items-center justify-center py-20">
             <section className="container mx-auto flex flex-col items-center justify-center gap-6 text-center">
-                <h1 className="text-5xl md:text-7xl font-bold ">
-                    Hi, I&apos;m Rahul Dinesh
+                <h1 className="text-5xl md:text-7xl font-bold">
+                    Hi, I&apos;m{" "}
+                    <span className="text-blue-500">
+                    <TextType
+                    text={[
+                "Rahul Dinesh",
+                "a Software Engineer",
+                "a College Senior Student",
+                "a Lifelong Learner",
+                        ]}
+                typingSpeed={75}
+                pauseDuration={1500}
+                showCursor={true}
+                cursorCharacter="|"
+                    />
+                    </span>
                 </h1>
                 <p className="text-sm text-muted-foreground">
                     Computer Science student at UNC Charlotte · Graduating Fall 2025
